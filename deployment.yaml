@@ -17,8 +17,8 @@ spec:
           image: chandraf80/register-app-pipeline:1.0.0-14
           resources:
             requests:
-              memory: "64Mi"
-              cpu: "250m"
+              memory: "16Mi"
+              cpu: "50m"
             limits:
               memory: "128Mi"
               cpu: "500m"
