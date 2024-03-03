@@ -16,8 +16,12 @@ spec:
         - name: register-app
           image: chandraf80/register-app-pipeline:1.0.0-14
           resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
             limits:
-              memory: "32Mi"
-              cpu: "50m"
+              memory: "128Mi"
+              cpu: "500m"
+
           ports:
             - containerPort: 8080
