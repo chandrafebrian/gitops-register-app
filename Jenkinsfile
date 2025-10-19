@@ -13,7 +13,7 @@ pipeline {
 
         stage("Checkout from SCM") {
                steps {
-                   git branch: 'main', credentialsId: 'github-chan', url: 'https://github.com/chandrafebrian/gitops-register-app'
+                   git branch: 'main', credentialsId: 'github-chandra', url: 'https://github.com/chandrafebrian/gitops-register-app'
                }
         }
 
@@ -31,11 +31,11 @@ pipeline {
             steps {
                 sh """
                    git config --global user.name "chandrafebrian"
-                   git config --global user.email "chandrafebrian990@gmail.com"
+                   git config --global user.email "chandrafebrian99@gmail.com"
                    git add deployment.yaml
                    git commit -m "Updated Deployment Manifest"
                 """
-                withCredentials([gitUsernamePassword(credentialsId: 'github-chan', gitToolName: 'Default')]) {
+                withCredentials([gitUsernamePassword(credentialsId: 'github-chandra', gitToolName: 'Default')]) {
                   sh "git push https://github.com/chandrafebrian/gitops-register-app main"
                 }
             }
