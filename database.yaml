@@ -6,7 +6,7 @@ metadata:
     app: chandra-postgres-db
 type: Opaque
 data:
-  POSTGRES_PASSWORD: Y2hhbmdlbWU
+  POSTGRES_PASSWORD: Y2hhbmdlbWU=
 ---
 apiVersion: v1
 kind: Service
