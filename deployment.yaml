@@ -26,10 +26,7 @@ spec:
 
       containers:
         - name: register-app
-<<<<<<< HEAD
           image: chandraf80/register-app-pipeline:1.0.0-23
-=======
-          image: chandraf80/register-app-pipeline:1.0.0-21
           env:
             - name: JAVA_TOOL_OPTIONS
               value: "-javaagent:/otel/opentelemetry-javaagent.jar"
@@ -39,7 +36,6 @@ spec:
               value: "http://otel-collector.observability.svc.cluster.local:4317"
           ports:
             - containerPort: 8080
->>>>>>> 81b2fb4 (add otel)
           resources:
             requests:
               memory: "30Mi"
