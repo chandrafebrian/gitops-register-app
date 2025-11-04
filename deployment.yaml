@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: register-app-deployment
+  namespace: default
 spec:
   replicas: 3
   selector:
@@ -12,9 +13,33 @@ spec:
       labels:
         app: register-app
     spec:
+      initContainers:
+        - name: download-otel-agent
+          image: busybox
+          command:
+            - sh
+            - -c
+            - wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar -O /otel/opentelemetry-javaagent.jar
+          volumeMounts:
+            - name: otel-agent
+              mountPath: /otel
+
       containers:
         - name: register-app
+<<<<<<< HEAD
           image: chandraf80/register-app-pipeline:1.0.0-23
+=======
+          image: chandraf80/register-app-pipeline:1.0.0-21
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-javaagent:/otel/opentelemetry-javaagent.jar"
+            - name: OTEL_SERVICE_NAME
+              value: "register-app"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector.observability.svc.cluster.local:4317"
+          ports:
+            - containerPort: 8080
+>>>>>>> 81b2fb4 (add otel)
           resources:
             requests:
               memory: "30Mi"
@@ -22,6 +47,10 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "500m"
+          volumeMounts:
+            - name: otel-agent
+              mountPath: /otel
 
-          ports:
-            - containerPort: 8080
+      volumes:
+        - name: otel-agent
+          emptyDir: {}
