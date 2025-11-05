@@ -30,21 +30,19 @@ spec:
         - name: register-app
           image: chandraf80/register-app-pipeline:1.0.0-23
           env:
-            # Jalankan OTEL Java Agent
+           
             - name: CATALINA_OPTS
               value: "-javaagent:/otel/opentelemetry-javaagent.jar"
             - name: JAVA_TOOL_OPTIONS
               value: "-javaagent:/otel/opentelemetry-javaagent.jar"
             
-            # Nama service
             - name: OTEL_SERVICE_NAME
               value: "register-app"
 
-            # 🛠️ PERUBAHAN INI MEMPERBAIKI KONEKSI: Pindah ke HTTP (4318)
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: "http://otel-collector.observability.svc.cluster.local:4318" # <-- PORT DIUBAH ke 4318
+              value: "http://otel-collector.observability.svc.cluster.local:4318" 
             - name: OTEL_EXPORTER_OTLP_PROTOCOL
-              value: "http/protobuf"                                            # <-- PROTOKOL DIUBAH ke http/protobuf
+              value: "http/protobuf"
           ports:
             - containerPort: 8080
 
