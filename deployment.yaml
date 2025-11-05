@@ -28,7 +28,8 @@ spec:
         - name: register-app
           image: chandraf80/register-app-pipeline:1.0.0-23
           env:
-            - name: JAVA_TOOL_OPTIONS
+            # gunakan CATALINA_OPTS untuk Tomcat agar agent aktif
+            - name: CATALINA_OPTS
               value: "-javaagent:/otel/opentelemetry-javaagent.jar"
             - name: OTEL_SERVICE_NAME
               value: "register-app"
