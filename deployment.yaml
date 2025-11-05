@@ -40,11 +40,11 @@ spec:
             - name: OTEL_SERVICE_NAME
               value: "register-app"
 
-            # Ganti endpoint agar sesuai protokol HTTP (port 4318)
+            # 🛠️ PERUBAHAN INI MEMPERBAIKI KONEKSI: Pindah ke HTTP (4318)
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: "http://otel-collector.observability.svc.cluster.local:4317"
+              value: "http://otel-collector.observability.svc.cluster.local:4318" # <-- PORT DIUBAH ke 4318
             - name: OTEL_EXPORTER_OTLP_PROTOCOL
-              value: "grpc"
+              value: "http/protobuf"                                            # <-- PROTOKOL DIUBAH ke http/protobuf
           ports:
             - containerPort: 8080
 
