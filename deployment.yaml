@@ -28,7 +28,7 @@ spec:
 
       containers:
         - name: register-app
-          image: chandraf80/register-app-pipeline:1.0.0-25
+          image: chandraf80/register-app-pipeline:1.0.0-26
           env:
            
             - name: CATALINA_OPTS
