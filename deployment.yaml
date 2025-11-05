@@ -19,7 +19,9 @@ spec:
           command:
             - sh
             - -c
-            - wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar -O /otel/opentelemetry-javaagent.jar
+            - >
+              wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
+              -O /otel/opentelemetry-javaagent.jar
           volumeMounts:
             - name: otel-agent
               mountPath: /otel
@@ -28,8 +30,11 @@ spec:
         - name: register-app
           image: chandraf80/register-app-pipeline:1.0.0-23
           env:
-            # gunakan CATALINA_OPTS untuk Tomcat agar agent aktif
+            # Gunakan CATALINA_OPTS agar Tomcat menjalankan agent
             - name: CATALINA_OPTS
+              value: "-javaagent:/otel/opentelemetry-javaagent.jar"
+            # Tambahkan juga JAVA_TOOL_OPTIONS untuk kompatibilitas tambahan
+            - name: JAVA_TOOL_OPTIONS
               value: "-javaagent:/otel/opentelemetry-javaagent.jar"
             - name: OTEL_SERVICE_NAME
               value: "register-app"
