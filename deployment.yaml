@@ -30,18 +30,27 @@ spec:
         - name: register-app
           image: chandraf80/register-app-pipeline:1.0.0-23
           env:
-            # Gunakan CATALINA_OPTS agar Tomcat menjalankan agent
+            # Jalankan OTEL Java Agent
             - name: CATALINA_OPTS
               value: "-javaagent:/otel/opentelemetry-javaagent.jar"
-            # Tambahkan juga JAVA_TOOL_OPTIONS untuk kompatibilitas tambahan
             - name: JAVA_TOOL_OPTIONS
               value: "-javaagent:/otel/opentelemetry-javaagent.jar"
+            
+            # Nama service
             - name: OTEL_SERVICE_NAME
               value: "register-app"
+
+            # Ganti endpoint agar sesuai protokol HTTP (port 4318)
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: "http://otel-collector.observability.svc.cluster.local:4317"
+              value: "http://otel-collector.observability.svc.cluster.local:4318"
+
+            # Pastikan protokol di-set ke http/protobuf
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: "http/protobuf"
+
           ports:
             - containerPort: 8080
+
           resources:
             requests:
               memory: "30Mi"
@@ -49,6 +58,7 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "500m"
+
           volumeMounts:
             - name: otel-agent
               mountPath: /otel
