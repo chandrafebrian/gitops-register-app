@@ -12,5 +12,4 @@ spec:
     - port: 8080
       targetPort: 8080
 
-  type: LoadBalancer
-  loadBalancerIP: 34.50.87.136
+  type: NodePort
