@@ -28,7 +28,7 @@ spec:
 
       containers:
         - name: register-app
-          image: chandraf80/register-app-pipeline:1.0.0-41
+          image: chandraf80/register-app-pipeline:1.0.0-42
           env:
             - name: CATALINA_OPTS
               value: "-javaagent:/otel/opentelemetry-javaagent.jar"
