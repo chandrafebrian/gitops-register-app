@@ -30,17 +30,16 @@ spec:
         - name: register-app
           image: chandraf80/register-app-pipeline:1.0.0-26
           env:
-           
             - name: CATALINA_OPTS
               value: "-javaagent:/otel/opentelemetry-javaagent.jar"
             - name: JAVA_TOOL_OPTIONS
               value: "-javaagent:/otel/opentelemetry-javaagent.jar"
-            
+
             - name: OTEL_SERVICE_NAME
               value: "register-app"
 
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: "http://otel-collector.observability.svc.cluster.local:4318" 
+              value: "http://otel-collector.observability.svc.cluster.local:4318"
             - name: OTEL_EXPORTER_OTLP_PROTOCOL
               value: "http/protobuf"
           ports:
